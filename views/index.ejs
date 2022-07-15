@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Session + Cookies</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+    <style>
+      body{
+        background-color: white;
+        color: black;
+        
+        
+      }
+      .contenedor{
+        width: 250px;
+        margin: auto;
+      }
+
+      button {
+        width: 200px;
+      }
+    </style>
+     
+    <h1>Session + Cookies</h1>
+
+    <div class="contenedor">
+    
+    
+    <% 
+
+
+    if (locals.errors){   
+          errors.forEach(error => { 
+    %>
+          <p style="color: tomato;"><%= error.msg %></p>
+    <%   
+          })
+    }
+    // si no hay errores... y los datos fueron enviados
+    if ( !locals.errors && locals.datos ) {
+    %>
+      <p>Hola <%= datos.nombre %>!
+      <br>elegiste el color: <%= datos.color %>, 
+      <br>tu email es: <%= datos.email %> 
+      <br>y tu edad es: <%= datos.edad %>
+      </p>
+    <% } %>
+
+    <p>Visitas...<%= visitas %> <br> (si das F5 se actualiza)</p>
+
+    
+    
+    <p><strong> <a href="session"> (Click aqui para comprobar que los datos session persisten) </a></strong></p>
+
+
+    <form action="/" method="POST">
+
+    <br> 
+    
+    <label for="nombre">Nombre:</label>
+    <input type="text" name="nombre" id="nombre" value="<%= locals.old && old.nombre ? old.nombre : '' %>">
+    
+    <br><br>
+
+    <label>Color:</label>
+    <select name="color" >
+        <option value="">Seleccione un color</option>
+        <option value="blanco" <%= locals.old && old.color === 'blanco' ? 'selected' : '' %>>Blanco</option>
+        <option value="negro" <%= locals.old && old.color === 'negro' ? 'selected' : '' %>>Negro</option>
+    </select>
+
+    <br><br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" value="<%= locals.old && old.email ? old.email : '' %>" >
+    
+    <br><br>
+
+    <label for="edad">Edad:</label>
+    <input type="text" name="edad" id="edad" value="<%= locals.old && old.edad ? old.edad : '' %>">
+    
+    <br><br>
+
+    <button type="submit">Enviar</button>
+    
+    </form>
+
+
+        
+    </div>
+
+  </body>
+</html>
